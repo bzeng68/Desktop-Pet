@@ -80,26 +80,16 @@ def update(cycle, check, event_number, x):
             cycle, heart, event_number, 1, 9)
 
     elif check == 5:
-        if x - 36 < 0:
-            frame = heart[cycle]
-            cycle, event_number = gif_work(
-                cycle, heart, event_number, 1, 9)
-        else:
-            frame = walk_positive[cycle]
-            cycle, event_number = gif_work(
-                cycle, walk_positive, event_number, 1, 9)
-            x -= 6
+        frame = walk_positive[cycle]
+        cycle, event_number = gif_work(
+            cycle, walk_positive, event_number, 1, 9)
+        x -= 6
 
     elif check == 6:
-        if x + 292 > window_width:
-            frame = heart[cycle]
-            cycle, event_number = gif_work(
-                cycle, heart, event_number, 1, 9)
-        else:
-            frame = walk_negative[cycle]
-            cycle, event_number = gif_work(
-                cycle, walk_negative, event_number, 1, 9)
-            x += 6
+        frame = walk_negative[cycle]
+        cycle, event_number = gif_work(
+            cycle, walk_negative, event_number, 1, 9)
+        x += 6
     window.geometry('256x256+'+str(x - 286) +
                     '+'+str(window_height - 316))
     label.config(image=frame)
@@ -125,12 +115,20 @@ def event(cycle, check, event_number, x):
         window.after(1000, update, cycle, check, event_number, x)
 
     elif event_number in walk_pos_num:
-        check = 5
-        window.after(500, update, cycle, check, event_number, x)
+        if x - 36 < 0:
+            check = 4
+            window.after(400, update, cycle, check, event_number, x)
+        else:
+            check = 5
+            window.after(500, update, cycle, check, event_number, x)
 
     elif event_number in walk_neg_num:
-        check = 6
-        window.after(500, update, cycle, check, event_number, x)
+        if x + 292 > window_width:
+            check = 4
+            window.after(400, update, cycle, check, event_number, x)
+        else:
+            check = 6
+            window.after(500, update, cycle, check, event_number, x)
 
     elif event_number == 14:
         check = 3
