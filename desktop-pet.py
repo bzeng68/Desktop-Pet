@@ -80,13 +80,18 @@ def update(cycle, check, event_number, x):
             cycle, heart, event_number, 1, 9)
 
     elif check == 5:
-        frame = walk_positive[cycle]
-        cycle, event_number = gif_work(
-            cycle, walk_positive, event_number, 1, 9)
-        x -= 6
+        if x - 36 < 0:
+            frame = heart[cycle]
+            cycle, event_number = gif_work(
+                cycle, heart, event_number, 1, 9)
+        else:
+            frame = walk_positive[cycle]
+            cycle, event_number = gif_work(
+                cycle, walk_positive, event_number, 1, 9)
+            x -= 6
 
     elif check == 6:
-        if x + 36 > window_width:
+        if x + 292 > window_width:
             frame = heart[cycle]
             cycle, event_number = gif_work(
                 cycle, heart, event_number, 1, 9)
@@ -96,7 +101,7 @@ def update(cycle, check, event_number, x):
                 cycle, walk_negative, event_number, 1, 9)
             x += 6
     window.geometry('256x256+'+str(x - 286) +
-                    '+'+str(window_height - 296))
+                    '+'+str(window_height - 316))
     label.config(image=frame)
     label.pack()
     window.after(1, event, cycle, check, event_number, x)
