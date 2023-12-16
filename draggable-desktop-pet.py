@@ -87,8 +87,8 @@ def do_action(curr_frame_num, action_const, movement_diff, next_action_range):
 
 # simulates simple gravity based on if the bear is above ground level
 def gravity():
-    if desktopPetManager.get_y() < window_height - 316:
-        desktopPetManager.set_y(desktopPetManager.get_y() + 1)
+    if desktopPetManager.get_y() < window_height - bear_dimension - 36:
+        desktopPetManager.set_y(desktopPetManager.get_y() + 2)
         label.config(image = actions[FALLING_CONST])
         window.geometry(str(bear_dimension)+'x'+str(bear_dimension)+'+'+str(desktopPetManager.get_x())+'+'+str(desktopPetManager.get_y()))
         window.after(1, gravity)
@@ -191,20 +191,33 @@ window_width = window.winfo_screenwidth()
 window_height = window.winfo_screenheight()
 
 # initialize desktopPetManager and bear_dimension or size
-bear_dimension = 256
-desktopPetManager = DesktopPetManager(window_width - bear_dimension - 36, window_height - 316, False, False)
+bear_dimension = 96
+desktopPetManager = DesktopPetManager(window_width - bear_dimension - 36, window_height - bear_dimension - 36, False, False)
+bear_96_prefix = '96px_bears'
+bear_96_suffix = '_96'
+
+IDLE_PATH = '{0}\\idle{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+HEART_PATH = '{0}\\heart{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+WALK_POS_PATH = '{0}\\walking_positive{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+WALK_NEG_PATH = '{0}\\walking_negative{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+ITS_PATH = '{0}\\idle_to_sleep{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+SLEEP_PATH = '{0}\\sleep{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+STI_PATH = '{0}\\sleep_to_idle{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+GRABBED_PATH = '{0}\\grabbed_bear{1}.png'.format(bear_96_prefix, bear_96_suffix)
+LANDING_PATH = '{0}\\landing_bear{1}.gif'.format(bear_96_prefix, bear_96_suffix)
+FALLING_PATH = '{0}\\falling_bear{1}.png'.format(bear_96_prefix, bear_96_suffix)
 
 # actions and their respective gifs
-actions = {IDLE_CONST: [tk.PhotoImage(file=resource_path('idle.gif'), format='gif -index %i' % (i)) for i in range(5)],
-           HEART_CONST: [tk.PhotoImage(file=resource_path('heart.gif'), format='gif -index %i' % (i)) for i in range(4)],
-           WALK_POS_CONST: [tk.PhotoImage(file=resource_path('walking_positive.gif'), format='gif -index %i' % (i)) for i in range(6)], # walk to right
-           WALK_NEG_CONST: [tk.PhotoImage(file=resource_path('walking_negative.gif'), format='gif -index %i' % (i)) for i in range(6)], # walk to left
-           ITS_CONST: [tk.PhotoImage(file=resource_path('idle_to_sleep.gif'), format='gif -index %i' % (i)) for i in range(5)],
-           SLEEP_CONST: [tk.PhotoImage(file=resource_path('sleep.gif'), format='gif -index %i' % (i)) for i in range(4)],
-           STI_CONST: [tk.PhotoImage(file=resource_path('sleep_to_idle.gif'), format='gif -index %i' % (i)) for i in range(6)],
-           GRABBED_CONST: tk.PhotoImage(file=resource_path('grabbed_bear.png')),
-           LANDING_CONST: [tk.PhotoImage(file=resource_path('landing_bear.gif'), format='gif -index %i' % (i)) for i in range(5)],
-           FALLING_CONST: tk.PhotoImage(file=resource_path('falling_bear.png'))}
+actions = {IDLE_CONST: [tk.PhotoImage(file=resource_path(IDLE_PATH), format='gif -index %i' % (i)) for i in range(5)],
+           HEART_CONST: [tk.PhotoImage(file=resource_path(HEART_PATH), format='gif -index %i' % (i)) for i in range(4)],
+           WALK_POS_CONST: [tk.PhotoImage(file=resource_path(WALK_POS_PATH), format='gif -index %i' % (i)) for i in range(6)], # walk to right
+           WALK_NEG_CONST: [tk.PhotoImage(file=resource_path(WALK_NEG_PATH), format='gif -index %i' % (i)) for i in range(6)], # walk to left
+           ITS_CONST: [tk.PhotoImage(file=resource_path(ITS_PATH), format='gif -index %i' % (i)) for i in range(5)],
+           SLEEP_CONST: [tk.PhotoImage(file=resource_path(SLEEP_PATH), format='gif -index %i' % (i)) for i in range(4)],
+           STI_CONST: [tk.PhotoImage(file=resource_path(STI_PATH), format='gif -index %i' % (i)) for i in range(6)],
+           GRABBED_CONST: tk.PhotoImage(file=resource_path(GRABBED_PATH)),
+           LANDING_CONST: [tk.PhotoImage(file=resource_path(LANDING_PATH), format='gif -index %i' % (i)) for i in range(5)],
+           FALLING_CONST: tk.PhotoImage(file=resource_path(FALLING_PATH))}
 
 label = tk.Label(window, bg='black', width = bear_dimension, height = bear_dimension) # label is what the frame of the gif gets put on
 window.overrideredirect(True) # hide tkinter gui outline
