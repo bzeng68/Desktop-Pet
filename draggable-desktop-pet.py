@@ -192,7 +192,7 @@ window_height = window.winfo_screenheight()
 
 # initialize desktopPetManager and bear_dimension or size
 bear_dimension = 96
-desktopPetManager = DesktopPetManager(window_width - bear_dimension - 36, window_height - bear_dimension - 36, False, False)
+desktopPetManager = DesktopPetManager(window_width - bear_dimension - 36, window_height - bear_dimension - 52, False, False)
 bear_96_prefix = '96px_bears'
 bear_96_suffix = '_96'
 
