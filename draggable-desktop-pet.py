@@ -87,7 +87,7 @@ def do_action(curr_frame_num, action_const, movement_diff, next_action_range):
 
 # simulates simple gravity based on if the bear is above ground level
 def gravity():
-    if desktopPetManager.get_y() < window_height - bear_dimension - 36:
+    if desktopPetManager.get_y() < window_height - bear_dimension - 52:
         desktopPetManager.set_y(desktopPetManager.get_y() + 2)
         label.config(image = actions[FALLING_CONST])
         window.geometry(str(bear_dimension)+'x'+str(bear_dimension)+'+'+str(desktopPetManager.get_x())+'+'+str(desktopPetManager.get_y()))
